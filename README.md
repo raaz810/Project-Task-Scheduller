@@ -4,7 +4,7 @@ A simple and efficient Task Scheduler Web Application that helps users manage da
 
 🚀 Live Demo
 
-🔗 Website: https://raaz810.github.io/Project-Task-Scheduller/
+🔗 Website: https://project-task-scheduller.vercel.app/
 
 📖 Overview
 
