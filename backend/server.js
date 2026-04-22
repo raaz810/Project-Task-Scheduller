@@ -10,7 +10,9 @@ const Project = require('./models/Project');
 const Task = require('./models/Task');
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: "https://project-task-scheduller.vercel.app"
+}));
 app.use(express.json());
 
 // Connect Database

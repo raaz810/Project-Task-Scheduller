@@ -27,7 +27,7 @@ const Auth = () => {
         try {
             const endpoint = isLogin ? '/api/auth/login' : '/api/auth/signup';
             const payload = isLogin ? { email: formData.email, password: formData.password } : formData;
-            const res = await axios.post(`http://localhost:5000${endpoint}`, payload);
+            const res = await axios.post(`${import.meta.env.VITE_API_URL}${endpoint}`, payload);
             
             login(res.data.user, res.data.token);
             navigate('/dashboard');

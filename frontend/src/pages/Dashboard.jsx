@@ -28,7 +28,7 @@ const Dashboard = () => {
     const fetchProjects = async () => {
         try {
             const token = localStorage.getItem('token');
-            const res = await axios.get('http://localhost:5000/api/projects', {
+            const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/projects`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setProjects(res.data);
@@ -40,7 +40,7 @@ const Dashboard = () => {
     const fetchTasks = async () => {
         try {
             const token = localStorage.getItem('token');
-            let url = 'http://localhost:5000/api/tasks';
+            let url = `${import.meta.env.VITE_API_URL}/api/tasks`;
             if (selectedProject) {
                 url += `?projectId=${selectedProject.id}`;
             }
@@ -58,7 +58,7 @@ const Dashboard = () => {
         if (!newProjectName.trim()) return;
         try {
             const token = localStorage.getItem('token');
-            const res = await axios.post('http://localhost:5000/api/projects', { name: newProjectName }, {
+            const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/projects`, { name: newProjectName }, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setProjects([res.data, ...projects]);
@@ -78,7 +78,7 @@ const Dashboard = () => {
             const payload = { ...newTaskForm };
             if (selectedProject) payload.projectId = selectedProject.id;
             
-            const res = await axios.post('http://localhost:5000/api/tasks', payload, {
+            const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/tasks`, payload, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setTasks([res.data, ...tasks]);
@@ -93,7 +93,7 @@ const Dashboard = () => {
         try {
             const token = localStorage.getItem('token');
             const newStatus = task.status === 'Done' ? 'Todo' : 'Done';
-            const res = await axios.put(`http://localhost:5000/api/tasks/${task.id}`, { status: newStatus }, {
+            const res = await axios.put(`${import.meta.env.VITE_API_URL}/api/tasks/${task.id}`, { status: newStatus }, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setTasks(tasks.map(t => t.id === task.id ? res.data : t));
@@ -105,7 +105,7 @@ const Dashboard = () => {
     const deleteTask = async (id) => {
         try {
             const token = localStorage.getItem('token');
-            await axios.delete(`http://localhost:5000/api/tasks/${id}`, {
+            await axios.delete(`${import.meta.env.VITE_API_URL}/api/tasks/${id}`, {
                 headers: { Authorization: `Bearer ${token}` }
             });
             setTasks(tasks.filter(t => t.id !== id));
